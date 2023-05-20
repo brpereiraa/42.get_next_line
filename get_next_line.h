@@ -3,18 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: brpereir <brpereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/28 11:31:17 by marvin            #+#    #+#             */
-/*   Updated: 2023/04/28 11:31:17 by marvin           ###   ########.fr       */
+/*   Created: 2023/05/19 18:51:25 by brpereir          #+#    #+#             */
+/*   Updated: 2023/05/20 17:20:12 by brpereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef BUFFER_SIZE
-# 	define BUFFER_SIZE 42
-# endif
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 42
+#endif
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
 
-void	get_next_line_utils(char *str, int i, int fd, int n);
-char	*get_next_line(int fd);
+char *join_string(char *first, char *copy);
+unsigned int ft_strlen(const char *str);
+char *get_next_line(int fd);
+
+#endif

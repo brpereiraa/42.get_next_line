@@ -3,72 +3,75 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: brpereir <brpereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/26 14:33:06 by marvin            #+#    #+#             */
-/*   Updated: 2023/04/26 14:33:06 by marvin           ###   ########.fr       */
+/*   Created: 2023/05/19 18:51:05 by brpereir          #+#    #+#             */
+/*   Updated: 2023/05/20 18:41:28 by brpereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char *read_line(int fd, char *str)
+static char *clean_line(char *str)
 {
+	size_t	i;
+	size_t	j;
 	char	*temp;
-	int		n_read;
-	
-	n_read = 1;
-	temp = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	while (n_read > 0)
+
+	i = 0;
+	j = 0;
+	while(str[i] && str[i] != '\n')
+		i++;
+	temp = (char *)malloc(sizeof(char) * i);
+	while(j < i)
 	{
-		n_read = read(fd, temp, BUFFER_SIZE);
-		if(n_read == -1)
-		{
-			free(temp);
-			return (NULL);	
-		}
-		temp[n_read] = 0;
-		break;
+		temp[j] = str[j];
+		j++;
 	}
 	return (temp);
 }
 
-char	*get_next_line(int fd)
+static char *get_text(char *str, int fd)
 {
-	static char		*buffer;
-	char			*temp;
-	int				i;
-	int 			flag;
-	int				bytes_read;
+	char *temp;
+	int nbytes;
 
-	i = 0;
-	while(1)
+	temp = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
+	if (!temp)
+		return (NULL);
+	nbytes = 1;
+	while (nbytes > 0 && ft_strchr())
 	{
-		if(read(fd, temp, BUFFER_SIZE) == -1)
-			return NULL;
-		buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE*2));
-		bytes_read = read(fd, buffer, BUFFER_SIZE);
-		buffer[bytes_read] = 0;
-		strjoin(buffer, temp, buffer);
-		free(temp);
+		nbytes = read(fd, temp, BUFFER_SIZE);
+		if (nbytes == -1)
+		{
+			free (temp);
+			free (str);
+			return (NULL);
+		}
+		str = join_string(str, temp);
+		// printf("helo");
+		// printf("%s", str);
 	}
-	temp = buffer;
-	free(buffer);
-	return(temp);
+	free(temp);
+	return (str);
 }
 
-
-int main()
+char *get_next_line(int fd)
 {
-	int fd = open("a.txt", O_RDONLY);
-	char *a;
+	static char *str; 
+	char *line;
 
-	while ((a = get_next_line(fd)))
-	{
-		printf("%s", a);
-	}
+	get_text(str, fd);
+	line = clean_line(str);
+	return (str);
+}
 
-	printf("%s", get_next_line(fd));
+int main(void)
+{
+	int fd;
 
-	return 0;
-} 
+	fd = open("a.txt", O_RDONLY);
+	printf("%s\n", get_next_line(fd));
+	return (0);
+}
