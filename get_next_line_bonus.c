@@ -83,16 +83,16 @@ static char *get_text(char *str, int fd)
 
 char *get_next_line(int fd)
 {
-	static char *str; 
+	static char *str[FOPEN_MAX]; 
 	char *line;
 
 	if(fd < 0 || BUFFER_SIZE < 0)
 		return (NULL);
-	str = get_text(str, fd);
-	if(!str)
+	str = get_text(str[fd], fd);
+	if(!str[fd])
 		return (NULL);
-	line = clean_line(str);
-	str = str_rest(str);
+	line = clean_line(str[fd]);
+	str[fd] = str_rest(str[fd]);
 	return (line);
 }
 
