@@ -12,50 +12,49 @@
 
 #include "get_next_line.h"
 
-unsigned int ft_strchr(const *str)
+unsigned int	ft_strchr(const char *str)
 {
 	size_t	i;
 
 	i = -1;
-	while(str[++i])
+	while (str[++i])
 	{
-		if(str[i] == '\n')
-			return 1;	
+		if (str[i] == '\n')
+			return (1);
 	}
-	return 0;
+	return (0);
 }
 
-unsigned int ft_strlen(const char *str)
+unsigned int	ft_strlen(const char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 		i++;
 	return (i);
 }
 
-char *join_string(char *first, char *copy)
+char	*join_string(char *first, char *copy)
 {
 	size_t	i;
 	size_t	j;
-	char *temp;
+	char	*temp;
 
-	temp = (char *)malloc(sizeof(char) * (ft_strlen(first) + ft_strlen(copy) + 1));
-	if(!temp)
+	temp = malloc(sizeof(char) * (ft_strlen(first) + ft_strlen(copy) + 1));
+	if (!temp)
 		return (NULL);
 	i = 0;
-	while(i < ft_strlen(first))
+	while (i < ft_strlen(first))
 	{
 		temp[i] = first[i];
 		i++;
 	}
 	j = i;
 	i = 0;
-	while(i < ft_strlen(copy))
-		temp[j++] = copy[i++];	
+	while (i < ft_strlen(copy))
+		temp[j++] = copy[i++];
 	temp[i] = 0;
-	free(first);
+	free (first);
 	return (temp);
 }
-

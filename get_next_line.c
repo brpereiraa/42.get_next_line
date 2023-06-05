@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-static char *clean_line(char *str)
+static char	*clean_line(char *str)
 {
 	size_t	i;
 	size_t	j;
@@ -20,10 +20,10 @@ static char *clean_line(char *str)
 
 	i = 0;
 	j = 0;
-	while(str[i] && str[i] != '\n')
+	while (str[i] && str[i] != '\n')
 		i++;
 	temp = (char *)malloc(sizeof(char) * i);
-	while(j < i)
+	while (j < i)
 	{
 		temp[j] = str[j];
 		j++;
@@ -31,34 +31,34 @@ static char *clean_line(char *str)
 	return (temp);
 }
 
-static char *str_rest(char *str)
+static char	*str_rest(char *str)
 {
-	size_t i;
-	size_t j;
-	char *temp;
+	size_t	i;
+	size_t	j;
+	char	*temp;
 
 	i = 0;
-	while(str[i] && str[i] != '\n')
+	while (str[i] && str[i] != '\n')
 		i++;
-	if(str[i] == '\n')
+	if (str[i] == '\n')
 		i++;
 	j = 0;
-	while(str[i++])
+	while (str[i++])
 		j++;
 	temp = (char *)malloc(sizeof(char) * (j + 1));
 	i -= j;
 	j = 0;
-	while(str[i])
+	while (str[i])
 		temp[j++] = str[i++];
 	temp[j] = 0;
 	free(str);
 	return (temp);
 }
 
-static char *get_text(char *str, int fd)
+static char	*get_text(char *str, int fd)
 {
-	char *temp;
-	int nbytes;
+	char	*temp;
+	int		nbytes;
 
 	temp = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
 	if (!temp)
@@ -74,33 +74,31 @@ static char *get_text(char *str, int fd)
 			return (NULL);
 		}
 		str = join_string(str, temp);
-		// printf("helo");
-		// printf("%s", str);
 	}
-	free(temp);
+	free (temp);
 	return (str);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-	static char *str; 
-	char *line;
+	static char	*str;
+	char		*line;
 
-	if(fd < 0 || BUFFER_SIZE < 0)
+	if (fd < 0 || BUFFER_SIZE < 0)
 		return (NULL);
 	str = get_text(str, fd);
-	if(!str)
+	if (!str)
 		return (NULL);
 	line = clean_line(str);
 	str = str_rest(str);
 	return (line);
 }
 
-int main(void)
-{
-	int fd;
+// int main(void)
+// {
+// 	int	fd;
 
-	fd = open("a.txt", O_RDONLY);
-	printf("%s\n", get_next_line(fd));
-	return (0);
-}
+// 	fd = open("a.txt", O_RDONLY);
+// 	printf("%s\n", get_next_line(fd));
+// 	return (0);
+// }
