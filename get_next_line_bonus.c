@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brpereir <brpereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 18:51:05 by brpereir          #+#    #+#             */
-/*   Updated: 2023/05/20 18:41:28 by brpereir         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:54:44 by brpereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static char	*get_text(char *str, int fd)
 	if (!temp)
 		return (NULL);
 	nbytes = 1;
-	while (nbytes > 0 && ft_strchr())
+	while (nbytes > 0 && ft_strchr(temp))
 	{
 		nbytes = read(fd, temp, BUFFER_SIZE);
 		if (nbytes == -1)
@@ -86,7 +86,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE < 0)
 		return (NULL);
-	str = get_text(str[fd], fd);
+	str[fd] = get_text(str[fd], fd);
 	if (!str[fd])
 		return (NULL);
 	line = clean_line(str[fd]);

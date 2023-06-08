@@ -6,7 +6,7 @@
 /*   By: brpereir <brpereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 18:51:05 by brpereir          #+#    #+#             */
-/*   Updated: 2023/05/20 18:41:28 by brpereir         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:52:28 by brpereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static char	*get_text(char *str, int fd)
 	if (!temp)
 		return (NULL);
 	nbytes = 1;
-	while (nbytes > 0 && ft_strchr())
+	while (nbytes > 0 && ft_strchr(temp))
 	{
 		nbytes = read(fd, temp, BUFFER_SIZE);
 		if (nbytes == -1)

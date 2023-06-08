@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: brpereir <brpereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 19:19:06 by marvin            #+#    #+#             */
-/*   Updated: 2023/05/23 19:19:06 by marvin           ###   ########.fr       */
+/*   Updated: 2023/06/08 16:53:22 by brpereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@
 char	*join_string(char *first, char *copy);
 int		ft_strlen(const char *str);
 char	*get_next_line(int fd);
+unsigned int	ft_strchr(const char *str);
 
 #endif
