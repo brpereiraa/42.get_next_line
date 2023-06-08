@@ -6,7 +6,7 @@
 /*   By: brpereir <brpereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 18:51:05 by brpereir          #+#    #+#             */
-/*   Updated: 2023/06/08 16:52:28 by brpereir         ###   ########.fr       */
+/*   Updated: 2023/06/08 18:44:08 by brpereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ static char	*str_rest(char *str)
 	size_t	j;
 	char	*temp;
 
+	if (!*str)
+	{
+		free(str);
+		return (NULL);
+	}
 	i = 0;
 	while (str[i] && str[i] != '\n')
 		i++;
