@@ -17,6 +17,8 @@ unsigned int	ft_strchr(const char *str)
 	size_t	i;
 
 	i = -1;
+	if (!str)
+		return (0);
 	while (str[++i])
 	{
 		if (str[i] == '\n')
@@ -29,6 +31,8 @@ unsigned int	ft_strlen(const char *str)
 {
 	int	i;
 
+	if (!str)
+		return (0);
 	i = 0;
 	while (str[i])
 		i++;
@@ -54,7 +58,7 @@ char	*join_string(char *first, char *copy)
 	i = 0;
 	while (i < ft_strlen(copy))
 		temp[j++] = copy[i++];
-	temp[i] = 0;
+	temp[j] = 0;
 	free (first);
 	return (temp);
 }

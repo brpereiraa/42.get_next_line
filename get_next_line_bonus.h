@@ -22,9 +22,9 @@
 # include <fcntl.h>
 # include <unistd.h>
 
-char	*join_string(char *first, char *copy);
-int		ft_strlen(const char *str);
-char	*get_next_line(int fd);
+char			*join_string(char *first, char *copy);
+int				ft_strlen(const char *str);
+char			*get_next_line(int fd);
 unsigned int	ft_strchr(const char *str);
 
 #endif
