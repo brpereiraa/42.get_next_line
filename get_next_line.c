@@ -20,7 +20,7 @@ static char	*clean_line(char *str)
 
 	i = 0;
 	j = 0;
-	if(!str[0])
+	if (!str[0])
 		return (NULL);
 	while (str[i] && str[i] != '\n')
 		i++;

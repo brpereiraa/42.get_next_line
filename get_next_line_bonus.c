@@ -20,38 +20,46 @@ static char	*clean_line(char *str)
 
 	i = 0;
 	j = 0;
+	if (!str[0])
+		return (NULL);
 	while (str[i] && str[i] != '\n')
 		i++;
-	temp = (char *)malloc(sizeof(char) * i);
+	if (str[i] == '\n')
+		i++;
+	temp = (char *)malloc(sizeof(char) * (i + 1));
 	while (j < i)
 	{
 		temp[j] = str[j];
 		j++;
 	}
+	temp[i] = 0;
 	return (temp);
 }
 
 static char	*str_rest(char *str)
 {
 	size_t	i;
-	size_t	j;
 	char	*temp;
+	char	*start;
 
+	if (!*str)
+	{
+		free(str);
+		return (NULL);
+	}
+	start = str;
+	while (*str && *str != '\n')
+		str++;
+	if (*str == '\n')
+		str++;
 	i = 0;
-	while (str[i] && str[i] != '\n')
+	while (str[i] && str)
 		i++;
-	if (str[i] == '\n')
-		i++;
-	j = 0;
-	while (str[i++])
-		j++;
-	temp = (char *)malloc(sizeof(char) * (j + 1));
-	i -= j;
-	j = 0;
-	while (str[i])
-		temp[j++] = str[i++];
-	temp[j] = 0;
-	free (str);
+	temp = (char *)malloc(sizeof(char) * (i + 1));
+	temp[i] = 0;
+	while (i-- > 0)
+		temp[i] = str[i];
+	free(start);
 	return (temp);
 }
 
@@ -60,11 +68,11 @@ static char	*get_text(char *str, int fd)
 	char	*temp;
 	int		nbytes;
 
-	temp = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
+	temp = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!temp)
 		return (NULL);
 	nbytes = 1;
-	while (nbytes > 0 && ft_strchr(temp))
+	while (nbytes > 0 && !ft_strchr(str))
 	{
 		nbytes = read(fd, temp, BUFFER_SIZE);
 		if (nbytes == -1)
@@ -73,6 +81,7 @@ static char	*get_text(char *str, int fd)
 			free (str);
 			return (NULL);
 		}
+		temp[nbytes] = 0;
 		str = join_string(str, temp);
 	}
 	free (temp);

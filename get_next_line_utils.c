@@ -39,26 +39,31 @@ unsigned int	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*join_string(char *first, char *copy)
+char	*join_string(char *s1, char *s2)
 {
-	size_t	i;
-	size_t	j;
-	char	*temp;
+	char	*ret;
+	char	*p;
+	int		i;
+	int		j;
+	int		size;
 
-	temp = malloc(sizeof(char) * (ft_strlen(first) + ft_strlen(copy) + 1));
-	if (!temp)
+	size = ft_strlen(s2);
+	if (s1)
+		size += ft_strlen(s1);
+	p = (char *)malloc(sizeof(*p) * (size + 1));
+	if (!p)
 		return (NULL);
+	ret = p;
 	i = 0;
-	while (i < ft_strlen(first))
+	j = 0;
+	while (s1 && s1[i])
 	{
-		temp[i] = first[i];
+		p[i] = s1[i];
 		i++;
 	}
-	j = i;
-	i = 0;
-	while (i < ft_strlen(copy))
-		temp[j++] = copy[i++];
-	temp[j] = 0;
-	free (first);
-	return (temp);
+	while (s2 && s2[j])
+		p[i++] = s2[j++];
+	p[i] = 0;
+	free(s1);
+	return (ret);
 }
