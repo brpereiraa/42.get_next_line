@@ -6,7 +6,7 @@
 /*   By: brpereir <brpereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 18:51:05 by brpereir          #+#    #+#             */
-/*   Updated: 2023/06/08 16:54:44 by brpereir         ###   ########.fr       */
+/*   Updated: 2023/07/11 10:25:27 by brpereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char	*get_next_line(int fd)
 	static char	*str[FOPEN_MAX];
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > FOPEN_MAX)
 		return (NULL);
 	str[fd] = get_text(str[fd], fd);
 	if (!str[fd])
